@@ -8,12 +8,16 @@ class StratpointHomePage:
         self.locators = HomePageLocators(page)
         self.navigation = Navigation(page)
         self.contact_us_link = page.get_by_role("link", name="Contact Us")
+        self.about_link = page.get_by_role("link", name="About 3")
 
     def navigate_to_stratpoint(self):
         self.navigation.navigate_to_stratpoint_home()
 
     def click_contact_us(self):
         self.contact_us_link.click()
+
+    def click_about(self):
+        self.about_link.click()
 
     def verify_lets_connect_heading_visible(self):
         """Verify Let's Connect heading is visible"""
