@@ -15,6 +15,6 @@ def take_screenshot(page, method_name, directory="reports/screenshots"):
         screenshot_path = screenshot_dir / f"{method_name}_{timestamp}.png"
 
     page.screenshot(path=str(screenshot_path))
-    print(f"Screenshot saved: {screenshot_path}")
+    # print(f"Screenshot saved: {screenshot_path}")
 
     return screenshot_path

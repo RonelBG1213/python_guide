@@ -1,31 +1,51 @@
 # Playwright BDD Framework
 
-A Behavior-Driven Development (BDD) framework using pytest-bdd and Playwright for testing the Stratpoint website.
+A portable, beginner-friendly Behavior-Driven Development (BDD) framework using pytest-bdd and Playwright for testing the Stratpoint website.
+
+## Features
+
+- ✅ **BDD with Gherkin** - Human-readable test scenarios
+- ✅ **Page Object Model** - Clean, maintainable code structure
+- ✅ **Automatic Screenshots** - Captured for every test step
+- ✅ **HTML Reports** - Beautiful reports with embedded screenshots and feature steps
+- ✅ **Data Tables** - Support for parameterized test data
+- ✅ **Failure Handling** - Auto-capture screenshots and traces on failures
+- ✅ **Portable** - Works on Windows, Mac, and Linux
 
 ## Project Structure
 
 ```
 playwrightBDD/
-├── features/           # Gherkin feature files (human-readable tests)
+├── features/                    # Gherkin feature files
 │   ├── homepage.feature
-│   └── contact_us.feature
-├── locators/           # Page element locators (centralized selectors)
-│   ├── __init__.py
-│   ├── home_page_locators.py
-│   └── contact_page_locators.py
-├── pages/              # Page Object Models (page interactions)
-│   ├── home_page.py
-│   ├── contact_page.py
-│   └── navigation.py
+│   ├── contact_us.feature
+│   └── about_page.feature
+├── main/                        # Main application code
+│   ├── locators/                # Page element locators (centralized selectors)
+│   │   ├── home_page_locators.py
+│   │   ├── contact_page_locators.py
+│   │   └── about_page_locators.py
+│   ├── pages/                   # Page Object Models
+│   │   ├── home_page.py
+│   │   ├── contact_page.py
+│   │   ├── about_page.py
+│   │   └── navigation.py
+│   └── utils/                   # Utility functions
+│       └── screenshot_utils.py
 ├── tests/
-│   └── step_defs/      # Step definitions (glue code)
+│   └── step_defs/               # Step definitions (glue code)
 │       ├── homepage_steps.py
-│       └── contact_us_steps.py
-├── conftest.py         # Pytest fixtures (browser & page setup)
-├── pytest.ini          # Pytest configuration
-├── requirements.txt    # Project dependencies
-├── .gitignore          # Git ignore rules
-└── README.md           # This file
+│       ├── contact_us_steps.py
+│       └── about_page_steps.py
+├── reports/                     # Auto-generated test reports (gitignored)
+│   ├── report.html
+│   ├── screenshots/
+│   └── traces/
+├── conftest.py                  # Pytest fixtures & hooks
+├── pytest.ini                   # Pytest configuration
+├── requirements.txt             # Project dependencies
+├── .gitignore                   # Git ignore rules
+└── README.md                    # This file
 ```
 
 ## Prerequisites
@@ -44,9 +64,9 @@ pip install -r requirements.txt
 **Required packages:**
 - `playwright==1.48.0` - Browser automation
 - `pytest==8.3.3` - Testing framework
-- `pytest-bdd==7.0.1` - BDD support for pytest
+- `pytest-bdd==8.1.0` - BDD support for pytest
 - `pytest-html==4.1.1` - HTML test reports
-- `pytest-xdist==3.6.1` - Parallel test execution
+- `pytest-xdist==3.6.1` - Parallel test execution (optional)
 
 ### 2. Install Playwright Browsers
 
@@ -96,19 +116,21 @@ pytest -k "Privacy Notice"
 ### Generate HTML Report
 
 ```bash
-# Run tests and generate HTML report
-pytest --html=reports/report.html --self-contained-html
+# HTML report is automatically generated in reports/report.html
+# Open it in your browser to see:
+# - Feature file steps with color-coded keywords
+# - Data tables for parameterized tests
+# - Screenshots for every test action
+# - Failure screenshots and traces
+pytest
 ```
 
-### Parallel Execution
-
-```bash
-# Run tests in parallel with 4 workers
-pytest -n 4
-
-# Auto-detect CPU cores and run parallel
-pytest -n auto
-```
+**Note:** HTML report includes:
+- ✅ Feature name and description
+- ✅ Scenario details with Given/When/Then steps
+- ✅ Data tables rendered as HTML tables
+- ✅ Screenshots embedded inline
+- ✅ Failure diagnostics (screenshots + traces)
 
 ### Headless vs Headed Mode
 

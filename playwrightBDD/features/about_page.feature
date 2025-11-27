@@ -17,3 +17,12 @@ Feature: About Page
     Given I am on the About page
     Then the navigation menu should be visible
     And the footer should be visible
+
+  Scenario: Verify About page elements are present
+    Given I am on the About page
+    Then I should see the following page elements:
+      | Element         | Expected State |
+      | About Heading   | Visible        |
+      | Description     | Visible        |
+      | Navigation Menu | Visible        |
+      | Footer          | Visible        |

@@ -22,6 +22,12 @@ def test_verify_about_page_navigation():
     pass
 
 
+@scenario('../../features/about_page.feature', 'Verify About page elements are present')
+def test_verify_about_page_elements_table():
+    """Test About page elements using data table"""
+    pass
+
+
 # Given steps
 @given('I am on the Stratpoint homepage')
 def navigate_to_homepage(page):
@@ -74,3 +80,23 @@ def verify_navigation_menu(page):
 def verify_footer(page):
     about_page = AboutPage(page)
     about_page.verify_footer_visible()
+
+
+@then('I should see the following page elements:')
+def verify_page_elements_from_table(page, datatable):
+    about_page = AboutPage(page)
+
+    # Iterate through data table rows (skip header)
+    for row in datatable[1:]:
+        element = row[0]
+        expected_state = row[1]
+
+        # Verify each element based on the table
+        if element == "About Heading":
+            about_page.verify_about_heading_visible()
+        elif element == "Description":
+            about_page.verify_company_description_visible()
+        elif element == "Navigation Menu":
+            about_page.verify_navigation_menu_visible()
+        elif element == "Footer":
+            about_page.verify_footer_visible()
